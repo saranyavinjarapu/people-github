@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1 class="panel-title">Organization Contributors</h1>
+	</div>
+	<!-- <div class="panel-body" *ngFor="let contrib of contributorlist">
+	<p class="clearfix">{{contrib}}</p>
+    </div> -->
+    <li *ngFor="let contrib of contributorlist"
+     [class.selected]="hero === selectedHero"
+      (click)="onSelect(hero)">
+     <span class="badge">{{contrib}}</span> {{contrib}}
+    </li>
+
+</div>
+		
