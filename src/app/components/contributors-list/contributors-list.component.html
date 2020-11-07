@@ -1,15 +1,30 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h1 class="panel-title">Organization Contributors</h1>
-	</div>
-	<!-- <div class="panel-body" *ngFor="let contrib of contributorlist">
-	<p class="clearfix">{{contrib}}</p>
-    </div> -->
-    <li *ngFor="let contrib of contributorlist"
-     [class.selected]="hero === selectedHero"
-      (click)="onSelect(hero)">
-     <span class="badge">{{contrib}}</span> {{contrib}}
-    </li>
+<div>
+    <div class="sidenav">
+        <div class="contributors_title">        
+            <h1>CONTRIBUTORS</h1>
+        </div>
+	    <div>
+            <ul class="contributors">
+                <li *ngFor="let contributor of contributorlist"
+                [class.selected]="contributor === selectedContributor"
+                (click)="findProfile(contributor)">       
+                {{contributor}}
+                </li>
+            </ul>            
+        </div>
+    </div>
+
+<div>
+  <div>
+        <pg-profile [contributorProfile]="contributorProfile" [contributorRepos]="contributorRepos">
+
+        </pg-profile>
+   </div>
+</div>
 
 </div>
+
+
+
+
 		

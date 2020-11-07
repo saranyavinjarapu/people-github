@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {Observable, forkJoin} from 'rxjs';
 
+
 @Component({
   selector: 'pg-contributors-list',
   templateUrl: './contributors-list.component.html',
@@ -12,6 +13,9 @@ import {Observable, forkJoin} from 'rxjs';
 export class ContributorsListComponent implements OnInit {
 
   contributorlist:any[];
+  contributorProfile:any[];
+  contributorRepos: any[];
+  username:string;
 
   constructor(private contributorsListService : ContributorsListService) 
   { 
@@ -49,7 +53,8 @@ export class ContributorsListComponent implements OnInit {
         {
            for(var j=0;j<individual_contributor_array.length;j++){
              if(finalContributorsList.indexOf(individual_contributor_array[j].login) === -1)
-             {           
+             {         
+                
               finalContributorsList.push(individual_contributor_array[j].login);
              }
            }
@@ -57,7 +62,19 @@ export class ContributorsListComponent implements OnInit {
       }
       this.contributorlist = finalContributorsList;        
     }); 
-   }  
+   }   
+
+    findProfile(searchQuery){
+    
+    this.contributorsListService.updateProfile(searchQuery);
+  	this.contributorsListService.getProfileInfo().subscribe(profile => {  
+      this.contributorProfile = profile ;
+  	});
+  	this.contributorsListService.getProfileRepos().subscribe(repos => {  	
+      this.contributorRepos = repos;
+      
+  	})  	
+  }
 
   ngOnInit(): void {
   }

@@ -1,51 +1,45 @@
-<form action="" class="search-form">
-	<div class="form-group">
-		<input type="text" class="form-control" placeholder="Search git users with username" [(ngModel)]="username" name="username" (keyup)="findProfile()">
+<div class = "profile">
+	<div class = "profile_title">
+	  <h1>CONTRIBUTOR INFORMATION</h1>
 	</div>
-</form>
-<div *ngIf="profile">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			{{profile.name}} <small>({{profile.login}})</small>
-			<span *ngIf="profile.company">, Works at {{profile.company}}</span>
-			{{profile.location}}
-		</div>
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-sm-3">
-					<img src="{{profile.avatar_url}}" class="img-circle img-responsive" alt="Profile Image">
-				</div>
-				<div class="col-sm-5">
-					<ul class="list-group">
-						<li class="list-group-item" *ngIf="profile.bio">{{profile.bio}}</li>
-						<li class="list-group-item" *ngIf="profile.hireable">Available for hire</li>
-						<li class="list-group-item" *ngIf="profile.blog"><a href="{{profile.blog}}" target="_blank">{{profile.blog}}</a></li>
-						<li class="list-group-item" *ngIf="profile.email"><a href="emailto:{{profile.email}}">{{profile.email}}</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-4">
-					<div>
-						<p>
-							<span class="label label-default">{{profile.followers}} Followers</span>
-							<span class="label label-primary">Following {{profile.following}}</span>
-							<span class="label label-success">{{profile.public_gists}} Public gists</span>
-							<span class="label label-info">{{profile.public_repos}} Public Repos</span>
-						</p>
-						<p><a href="{{profile.html_url}}" target="_blank" class="btn btn-success btn-sm">View profile on github</a></p>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">Repos</h3>
-							</div>
-							<div class="panel-body" *ngFor="let repo of repos">
-								<p class="clearfix">
-									{{repo.name}} <a href="{{repo.html_url}}" target="_blank" class="btn btn-sm btn-warning pull-right">View this project on github</a>
-								</p>
-								<p>{{repo.description}}</p>
-							</div>
-						</div>
-					</div>
-				</div>
+
+	<div class = "profile_detail">
+		<h1>CONTRIBUTOR DETAILS</h1>
+		<div *ngIf="contributorProfile" >			
+			<img [src] = "contributorProfile.avatar_url" class="contributor_img">
+			<div class="profile_detail_basic">
+				<div id="name">{{contributorProfile.name}}</div>
+				<div id="bio">{{contributorProfile.bio}}<div>
+				<div id="url"><a [href]="contributorProfile.html_url" target="_blank" class="git_url_button" >Profile</a></div>
 			</div>
-		</div>
+			<div class="profile_detail_full">
+				<div id="name">{{contributorProfile.name}}</div>
+				<p>
+					<span class="badge">{{contributorProfile.followers}} Followers</span>
+					<span class="badge">Following {{contributorProfile.following}}</span>
+					<span class="badge">{{contributorProfile.public_gists}} Public gists</span>
+					<span class="badge">{{contributorProfile.public_repos}} Public Repos</span>
+				</p>
+			</div>
+	     </div> 
 	</div>
+</div>
+
+
+<div class = "profile_repos">
+	<h1>CONTRIBUTOR REPOSITORIES</h1>
+	<div>
+		<ul class="profile_repos_list">
+			<li *ngFor="let repo of contributorRepos"
+			[class.selected]="repo === selectedRepo"
+			(click)="findProfile(contributor)">       
+			{{repo.name}}
+			</li>
+		</ul>   
+	</div>
+</div>
+
+<div class = "repos_detail">
+	<h1>REPOSITORY DETAILS</h1>
+
 </div>

@@ -13,10 +13,7 @@ export class ContributorsListService {
   private clientsecret = 'e8aeba65c646e879950c11f1e715aeae27107287';
   private repo_url_list = "https://api.github.com/orgs/Angular/repos?per_page=5&type=all";
 
-  constructor(private httpClient: HttpClient) { 
-    console.log("service is now ready!");
-  	this.username = 'SaranyaVinjarapu';
-  }
+  constructor(private httpClient: HttpClient) { }
 
   getContributorUrlList() {  
     let contributors_url = [];
@@ -28,9 +25,23 @@ export class ContributorsListService {
                               let url_link = this.httpClient.get(resp[key].contributors_url+"?client_id="+this.clientid+"&client_secret="+this.clientsecret);
                               contributors_url.push(url_link);
                             }      
-   }  
-   return contributors_url
- }));   
-
+                   }  
+           return contributors_url
+        }));   
   } 
+
+  updateProfile(username:string){
+  	this.username = username;
+  }
+
+  getProfileInfo(){
+    let profileDataURL = "https://api.github.com/users/" + this.username + "?client_id=" + this.clientid + "&client_secret=" + this.clientsecret
+    return this.httpClient.get<any>(profileDataURL).pipe(map(resp=>resp));
+  }
+
+  getProfileRepos() {
+    let repoDataURL = "https://api.github.com/users/" + this.username + "/repos?client_id=" + this.clientid + "&client_secret=" + this.clientsecret;
+    return this.httpClient.get<any>(repoDataURL).pipe(map(resp=>resp));
+  }
+
 }
