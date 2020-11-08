@@ -8,6 +8,7 @@ import { ContributorsListComponent } from './components/contributors-list/contri
 import { ContributorsListService } from './services/contributors-list.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RepositoryDetailComponent } from './components/repository-detail/repository-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { RepositoryDetailComponent } from './components/repository-detail/reposi
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [ContributorsListService],
   bootstrap: [AppComponent]
