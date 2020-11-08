@@ -15,6 +15,7 @@ export class ContributorsListComponent implements OnInit {
   contributorlist:any[];
   contributorProfile:any[];
   contributorRepos: any[];
+  reposContributors:any[];
   username:string;
 
   constructor(private contributorsListService : ContributorsListService) 
@@ -72,9 +73,11 @@ export class ContributorsListComponent implements OnInit {
   	});
   	this.contributorsListService.getProfileRepos().subscribe(repos => {  	
       this.contributorRepos = repos;
-      
-  	})  	
+      console.log(this.contributorRepos);      
+    });    
   }
+
+  
 
   ngOnInit(): void {
   }

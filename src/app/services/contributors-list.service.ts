@@ -9,6 +9,7 @@ import {Observable, forkJoin} from 'rxjs';
 export class ContributorsListService {
 
   private username:string;
+  public repoName;
   private clientid = '8a9709f56e2813755f06';
   private clientsecret = 'e8aeba65c646e879950c11f1e715aeae27107287';
   private repo_url_list = "https://api.github.com/orgs/Angular/repos?per_page=5&type=all";
@@ -43,5 +44,7 @@ export class ContributorsListService {
     let repoDataURL = "https://api.github.com/users/" + this.username + "/repos?client_id=" + this.clientid + "&client_secret=" + this.clientsecret;
     return this.httpClient.get<any>(repoDataURL).pipe(map(resp=>resp));
   }
+
+  
 
 }

@@ -1,27 +1,24 @@
 <div>
     <div class="sidenav">
-        <div class="contributors_title">        
-            <h1>CONTRIBUTORS</h1>
-        </div>
-	    <div>
-            <ul class="contributors">
-                <li *ngFor="let contributor of contributorlist"
-                [class.selected]="contributor === selectedContributor"
-                (click)="findProfile(contributor)">       
-                {{contributor}}
-                </li>
-            </ul>            
-        </div>
-    </div>
-
-<div>
-  <div>
+            <div class="contributors_title">        
+                <h1>CONTRIBUTORS</h1>
+            </div>
+            <div>
+                <ul class="contributors">
+                    <li *ngFor="let contributor of contributorlist"
+                    [class.selected]="contributor === selectedContributor"
+                    (click)="findProfile(contributor)">       
+                    {{contributor}}
+                    </li>
+                </ul>            
+            </div>
+     </div>
+    <div>
+    <div>
         <pg-profile [contributorProfile]="contributorProfile" [contributorRepos]="contributorRepos">
-
         </pg-profile>
-   </div>
-</div>
-
+    </div>
+    </div>
 </div>
 
 
