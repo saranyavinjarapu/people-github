@@ -1,47 +1,48 @@
-<div class = "profile">
-	<div class = "profile_title">
-	  <h1>CONTRIBUTOR INFORMATION</h1>
-	</div>
+<div class = "profile_detail">
+	<div class ="title">PROFILE DETAIL</div>
 
-	<div class = "profile_detail">
-		<h1>CONTRIBUTOR DETAILS</h1>
-		<div *ngIf="contributorProfile" >			
-			<img [src] = "contributorProfile.avatar_url" class="contributor_img">
-			<div class="profile_detail_basic">
+	<div id="wrapper" *ngIf="contributorProfile">
+		<div id="profile_detail_basic">
+			<div class ="detail_title">BASIC INFO</div>
+			<div> 
+				<img [src] = "contributorProfile.avatar_url" class ="contributor_img" >
 				<div id="name">{{contributorProfile.name}}</div>
-				<div id="bio">{{contributorProfile.bio}}<div>
 				<div id="url"><a [href]="contributorProfile.html_url" target="_blank" class="git_url_button" >Profile</a></div>
+				
 			</div>
-			<div class="profile_detail_full">
-				<div id="name">{{contributorProfile.name}}</div>
-				<p>
-					<span class="badge">{{contributorProfile.followers}} Followers</span>
-					<span class="badge">Following {{contributorProfile.following}}</span>
-					<span class="badge">{{contributorProfile.public_gists}} Public gists</span>
-					<span class="badge">{{contributorProfile.public_repos}} Public Repos</span>
-				</p>
-			</div>
-	     </div> 
+	    </div>
+		<div id="profile_detail_full">
+			<div class ="detail_title">FULL INFO</div>
+			<div id="name">{{contributorProfile.name}}</div>
+			<p id="info_badge">
+				<span class="badge">{{contributorProfile.followers}} Followers</span>
+				<span class="badge">Following {{contributorProfile.following}}</span>
+				<span class="badge">{{contributorProfile.public_gists}} Public gists</span>
+				<span class="badge">{{contributorProfile.public_repos}} Public Repos</span>
+			</p>
+			<div id="bio">Bio : {{contributorProfile.bio}}</div>
+			<div id="location">Location : {{contributorProfile.location}}</div>
+			<div id="url"><a [href]="contributorProfile.blog" target="_blank" class="git_url_button">Blog</a></div>
+		</div>
+		<div id="profile_repository">
+			<div class ="detail_title">CONTRIBUTOR REPOSITORIES</div>
+			<ul class="profile_repos_list">						
+				<li *ngFor="let repo of contributorRepos"
+				[class.selected]="repo === selectedRepo"
+				(click)="findReposContributors(repo.full_name)">       
+				{{repo.name}}
+				</li>					 
+		    </ul>        
+		</div>
 	</div>
-</div>
+ </div>
 
 
-<div class = "profile_repos">
-	<h1>CONTRIBUTOR REPOSITORIES</h1>
-	<div>
-		<ul class="profile_repos_list">
-			<li *ngFor="let repo of contributorRepos"
-			[class.selected]="repo === selectedRepo"
-			(click)="findReposContributors(repo.full_name)">       
-			{{repo.name}}
-			</li>
-		</ul>   
-	</div>
+
+<div class = "repo_detail">
+	<div class ="title">REPOSITORY DETAIL</div>
+	<pg-repository-detail [reposContributors]="reposContributors">
+    </pg-repository-detail>
 </div>
 
-<div>
-	<pg-repository-detail [reposContributors]="reposContributors" >
-	</pg-repository-detail>
-</div>
-</div>
 

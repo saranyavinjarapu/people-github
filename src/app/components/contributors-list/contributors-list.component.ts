@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ContributorsListService} from '../../services/contributors-list.service';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {Observable, forkJoin} from 'rxjs';
+import {ContributorsListService} from '../../services/contributors-list.service';
 
 
 @Component({
@@ -43,6 +43,7 @@ export class ContributorsListComponent implements OnInit {
   getContributorsList(contributor_url_link) {
 
     let finalContributorsList = [];
+    let finalContributorsListArray = [];
     
     //run http requests for all urls and gather final contributor data
     forkJoin(contributor_url_link).subscribe(contributors_data => {       
@@ -57,11 +58,15 @@ export class ContributorsListComponent implements OnInit {
              {         
                 
               finalContributorsList.push(individual_contributor_array[j].login);
+              finalContributorsListArray.push(individual_contributor_array[j]);
              }
            }
         }       
       }
-      this.contributorlist = finalContributorsList;        
+      this.contributorlist = finalContributorsList;
+
+      console.log('hey', finalContributorsListArray);
+              
     }); 
    }   
 
@@ -80,6 +85,7 @@ export class ContributorsListComponent implements OnInit {
   
 
   ngOnInit(): void {
+    
   }
 
 }

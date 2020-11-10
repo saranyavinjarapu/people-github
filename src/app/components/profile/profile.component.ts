@@ -10,8 +10,9 @@ export class ProfileComponent implements OnInit {
 
   @Input() contributorProfile:any;
   @Input() contributorRepos:any;
-  @Input() reposContributors:any;
- 
+  
+  reposContributors:any[];
+  
 
   constructor(private profileService : ProfileService) {
    }
@@ -23,9 +24,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getReposContributors().subscribe(repoContrib => {  	
       this.reposContributors = repoContrib;
       console.log('ooo',this.reposContributors);      
-    }); 
-   
-      
+    });       
   }
  
   ngOnInit(): void {
